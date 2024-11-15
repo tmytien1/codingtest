@@ -66,9 +66,38 @@
             return true;
         }
         
+        // <summary>
+        // Find and return largest palindrome within string
+        // </summary>
+        // <param name="input"></param>
+        // <returns>largest palindrome</returns>
         public string FindLargestPalindrome(string input)
         {
-            return null;
+            if (string.IsNullOrWhiteSpace(input))
+                return null;
+
+            if (input.Length == 1)
+                return input;
+
+            int maxLength = 0;
+            var maxPalindrome = string.Empty;
+
+            // Find all possible substring of the input string
+            for (var i = 0; i < input.Length; i ++)
+            {
+                for (var j = i; j < input.Length; j ++)
+                {
+                    var subString = input.Substring(i, j- i + 1);
+                    // For each substring, checking if its a palindrome
+                    if (IsPalindrome(subString) && subString.Length > maxLength) 
+                    {
+                        maxLength = subString.Length;
+                        maxPalindrome = subString;
+                    }
+                }
+            }
+
+            return maxLength > 1 ? maxPalindrome : null;
         }
 
         #endregion
